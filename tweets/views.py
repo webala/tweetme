@@ -6,6 +6,8 @@ from .models import Tweet
 from .forms import TweetForm
 from django.utils.http import is_safe_url
 from django.conf import settings
+from .serializers import TweetSerializer
+from rest_framework.response import Response
 
 ALLOWED_HOSTS = settings.ALLOWED_HOSTS
 
@@ -54,9 +56,16 @@ def tweet_list_view(request, *args, **kwargs):
     }
     return JsonResponse(data)
 
-
-
 def tweet_create_view(request, *args, **kwargs):
+    data = request.POST or None
+    serializer = TweetSerializer(data=data)
+    if serializer.is_valid():
+        obj = serializer.save(user=request.user)
+        return JsonResponse(serializer.data, status=201)
+    return JsonResponse({}, status=400)
+
+
+def tweet_create_view_pure_django(request, *args, **kwargs):
     
     form = TweetForm(request.POST or None)
     next_url = request.POST.get('next') or None
@@ -65,7 +74,7 @@ def tweet_create_view(request, *args, **kwargs):
     if not request.user.is_authenticated:
         user = None
         if request.is_ajax():
-            return JsonResponse({}, status=401)
+            return JsonResponse({}, status=401) #not authorised
         return redirect(settings.LOGIN_URL)
   
 

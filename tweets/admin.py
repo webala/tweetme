@@ -4,7 +4,7 @@ from .models import Tweet
 
 class TweetAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'user']
-    search_fields = ['user__username', 'user__email']
+    search_fields = ['content','user__username', 'user__email']
     class Meta:
         model = Tweet
 
