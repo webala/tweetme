@@ -26,9 +26,13 @@ SECRET_KEY = '3q4s*t2s212_dd+z2s7(#6$x_z6nd24q3w#6%&49rs4ax48kp)'
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
+<<<<<<< HEAD
 LOGIIN_URL = '/login'
 MAX_TWEET_LENGTH = 240
 TWEET_ACTION_OPTIONS = ['like', 'unlike', 'retweet']
+=======
+
+>>>>>>> parent of 67de47e... user added
 
 # Application definition
 

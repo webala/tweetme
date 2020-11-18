@@ -25,6 +25,7 @@
 
 <script>
 
+<<<<<<< HEAD
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -42,6 +43,9 @@ function getCookie(name) {
 }
 
     const handleTweetCreateFormError = (msg, display) => {
+=======
+    const handleTweetCreateFormError = (msg, display) =>{
+>>>>>>> parent of 67de47e... user added
 
         let errDiv = document.getElementById("tweet-create-form-error")
         if (display === true){
@@ -73,8 +77,8 @@ function getCookie(name) {
         xhr.setRequestHeader("X-Requested-With","XMLHttpRequest") 
         xhr.onload = function() {
             if (xhr.status === 201){
-                handleTweetCreateFormError("", false)
-                const newTweetJson = xhr.response
+                const newTweet = xhr.response
+                const newTweetJson = JSON.parse(newTweet)
                 const newTweetElement = formatTweetElement(newTweetJson)
                 //console.log(newTweetElement)
                 const ogHtml = tweetContainerElement.innerHTML
@@ -85,7 +89,7 @@ function getCookie(name) {
                 console.log(errorJson)
                 const contentError = errorJson.content
                 let contentErrorMsg;
-                if (contentError){ 
+                if (contentError){
                     contentErrorMsg = contentError[0]
                     if (contentErrorMsg){
                         handleTweetCreateFormError(contentErrorMsg, true)

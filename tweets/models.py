@@ -1,4 +1,5 @@
 import random
+<<<<<<< HEAD
 from django.db import models
 from django.conf import settings
 
@@ -16,9 +17,17 @@ class Tweet(models.Model):
     image = models.FileField(upload_to='images/', blank=True, null=True)
     likes = models.ManyToManyField(User, related_name='tweet_user', blank=True, through=TweetLike)
     timestamp = models.DateTimeField(auto_now_add=True)
+=======
+
+class Tweet(models.Model):
+    content = models.TextField(blank=True, null=True)
+    image = models.FileField(upload_to='images/', blank=True, null=True)
+>>>>>>> parent of 67de47e... user added
+    
 
     class Meta:
-        ordering = ['-id']   
+        ordering = ['-id']
+        
 
     def serialize(self):
         return {
